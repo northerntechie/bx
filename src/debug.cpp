@@ -36,6 +36,7 @@
 #if BX_CONFIG_EXCEPTION_HANDLING_USE_POSIX_SIGNALS
 #	include <signal.h>
 #elif BX_CONFIG_EXCEPTION_HANDLING_USE_WINDOWS_SEH
+#	include <windows.h>
 
 struct ExceptionRecord
 {
@@ -57,7 +58,10 @@ struct ExceptionPointers
 
 typedef uint32_t (__stdcall* TopLevelExceptionFilterFn)(ExceptionPointers* _exceptionInfo);
 
-extern "C" __declspec(dllimport) TopLevelExceptionFilterFn __stdcall SetUnhandledExceptionFilter(TopLevelExceptionFilterFn _topLevelExceptionFilter);
+// TODO(Juno): Does not compile
+//extern "C" __declspec(dllimport)TopLevelExceptionFilterFn
+//	__stdcall SetUnhandledExceptionFilter(
+//		TopLevelExceptionFilterFn _topLevelExceptionFilter);
 #endif // BX_CONFIG_EXCEPTION_HANDLING_*
 
 #if BX_CRT_NONE
@@ -506,7 +510,8 @@ namespace bx
 		ExceptionHandler()
 		{
 			BX_TRACE("ExceptionHandler - Windows SEH");
-			SetUnhandledExceptionFilter(topLevelExceptionFilter);
+			// TODO(Juno): Does not compile
+			//SetUnhandledExceptionFilter(topLevelExceptionFilter);
 		}
 
 		static uint32_t __stdcall topLevelExceptionFilter(ExceptionPointers* _info)
