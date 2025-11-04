@@ -17,7 +17,7 @@
 #	include <bx/crt0.h>
 #else
 #	if BX_CONFIG_CRT_DIRECTORY_READER
-#		include <dirent.h>
+#		include "../include/compat/msvc/dirent.h"
 #	endif // BX_CONFIG_CRT_DIRECTORY_READER
 #	include <stdio.h>      // remove
 #	include <sys/stat.h>   // stat, mkdir
